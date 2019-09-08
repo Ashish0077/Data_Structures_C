@@ -22,14 +22,25 @@ typedef struct DynamicArray darray;
 darray* createArray(int size);
 void add(darray* arr, int element);
 void display(darray* darr);
+void insert(darray* darr, int element, int position);
 
+/* main function starts here */
 int main (void) 
 {
+    //test Code
     darray* arr = createArray(5);
-    for(int i = 0 ; i < 10; i++) {
+    for(int i = 0 ; i < 10; i++) 
+    {
         add(arr, i);
     }
+    display(arr);
 
+    insert(arr, 34, 2);
+    printf("\n\n");
+    display(arr);
+
+    insert(arr, 98, 100);
+    printf("\n\n");
     display(arr);
     return 0;
 }
@@ -52,7 +63,7 @@ darray* createArray(int size)
 
 /*
     This function adds the element to the end of the array,
-    and if there is no space in the array it reallocates it
+    and if there is no space in the array it reallocates the array and then adds the element
 */
 void add(darray* darr, int element) 
 {
@@ -81,6 +92,42 @@ void add(darray* darr, int element)
     }    
 }
 
+/*
+    This function inserts element at custom position
+*/
+void insert (darray* darr, int element, int position) 
+{
+    if(position > darr->length)
+    {
+        printf("\n[ERROR] Insertion not possible location does not exit\n");
+        return;
+    }
+
+    //inserting in sequential manner
+    if(position == darr->length) {
+        add(darr, element);
+        return;
+    }
+
+    //inserting at position
+    if (position <= darr->length) 
+    {
+        //reallocating the array
+        darr->size = (int) (darr->size + (darr->size) * 0.5);
+        darr->arr = (int*) realloc(darr->arr, (darr->size) * sizeof(int));
+        //creating free space at insert position
+        int* arr = darr->arr;
+        for(int i = darr->length - 1; i >= position; i--) {
+            *(arr + i + 1) = *(arr + i);
+        }
+        *(arr + position) = element;
+        darr->length++;
+    }
+}
+
+/*
+    This function displays the  elements of array
+*/
 void display(darray* darr)
 {
     int* arr = darr->arr;
