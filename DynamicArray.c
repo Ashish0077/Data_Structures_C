@@ -23,6 +23,8 @@ darray* createArray(int size);
 void add(darray* arr, int element);
 void display(darray* darr);
 void insert(darray* darr, int element, int position);
+int delete(darray* darr, int position);
+int getElement(darray* darr, int position);
 
 /* main function starts here */
 int main (void) 
@@ -42,6 +44,24 @@ int main (void)
     insert(arr, 98, 100);
     printf("\n\n");
     display(arr);
+
+    delete(arr, 2);
+    printf("\n\n");
+    display(arr);
+
+    delete(arr, 0);
+    printf("\n\n");
+    display(arr);
+
+    printf("\n\n");
+    printf("\n\n");
+
+    printf("get element 2: %d", getElement(arr, 2));
+
+    printf("\n\n");
+    printf("\n\n");
+
+    printf("get element 8: %d", getElement(arr, 8));
     return 0;
 }
 
@@ -65,7 +85,7 @@ darray* createArray(int size)
     This function adds the element to the end of the array,
     and if there is no space in the array it reallocates the array and then adds the element
 */
-void add(darray* darr, int element) 
+void add (darray* darr, int element) 
 {
     darr->length++; //incrementing the length
     if (darr->length <= darr->size) 
@@ -97,14 +117,14 @@ void add(darray* darr, int element)
 */
 void insert (darray* darr, int element, int position) 
 {
-    if(position > darr->length)
+    if (position > darr->length && position < 0)
     {
-        printf("\n[ERROR] Insertion not possible location does not exit\n");
+        printf("\n[ERROR] Insertion not possible location does not exist\n");
         return;
     }
 
     //inserting in sequential manner
-    if(position == darr->length) {
+    if (position == darr->length) {
         add(darr, element);
         return;
     }
@@ -117,7 +137,7 @@ void insert (darray* darr, int element, int position)
         darr->arr = (int*) realloc(darr->arr, (darr->size) * sizeof(int));
         //creating free space at insert position
         int* arr = darr->arr;
-        for(int i = darr->length - 1; i >= position; i--) {
+        for (int i = darr->length - 1; i >= position; i--) {
             *(arr + i + 1) = *(arr + i);
         }
         *(arr + position) = element;
@@ -126,9 +146,41 @@ void insert (darray* darr, int element, int position)
 }
 
 /*
+    This function delete element at custom position
+*/
+int delete (darray* darr, int position)
+{
+    if(position > darr->length && position < 0)
+    {
+        printf("\n[ERROR] Deletion not possible, location does not exist\n");
+        return -1;
+    }
+    int* arr = darr->arr;
+    int deletedElement = *(arr + position);
+    for (int i = position + 1; i < darr->length; i++) 
+    {
+        *(arr + i - 1) = *(arr + i);
+    }
+    darr->length--;
+    return deletedElement;
+}
+/* 
+    this function returns the element at the provided position
+*/
+int getElement (darray* darr, int position) {
+    if (position > darr->length && position < 0)
+    {
+        printf("\n[ERROR] Deletion not possible, location does not exist\n");
+        return -1;
+    }
+
+    return *((darr->arr) + position);
+}
+
+/*
     This function displays the  elements of array
 */
-void display(darray* darr)
+void display (darray* darr)
 {
     int* arr = darr->arr;
     for(int i = 0; i < darr->length; i++) 
