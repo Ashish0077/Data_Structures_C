@@ -11,8 +11,8 @@
 //Associating properties of dynamic array into one datatype
 struct DynamicArray 
 {
-    int size; //actual size of the array
-    int length; //no. of elements in the array
+    size_t size; //actual size of the array
+    size_t length; //no. of elements in the array
     int* arr; //array itself
 };
 
@@ -76,7 +76,7 @@ darray* createArray(int size)
     printf("\ncreated array at : %p\n", newArray->arr);
     newArray->length = 0; //initally length will be 0
     newArray->size = size; //initial size
-    printf("\ncreated array size and length : %d, %d\n", newArray->size, newArray->length);
+    printf("\ncreated array size and length : %lu, %lu\n", newArray->size, newArray->length);
 
     return newArray;
 }
@@ -102,7 +102,7 @@ void add (darray* darr, int element)
         //reallocating the array
         darr->size = (int) (darr->size + (darr->size) * 0.5);
         darr->arr = (int*) realloc(darr->arr, (darr->size) * sizeof(int));
-        printf("\nreallocated array size : %d\n", darr->size);
+        printf("\nreallocated array size : %lu\n", darr->size);
         printf("\nreallocated array address : %p\n", darr->arr);
         //inserting the element
         int* arr = darr->arr;
