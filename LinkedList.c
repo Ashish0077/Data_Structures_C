@@ -22,6 +22,7 @@ NODE* getNode();
 void insertNode(NODE** addressOfHead, int position);
 void deleteNode(NODE** addressOfHead, int position);
 int getListSize(NODE* head);
+void printList(NODE* head);
 
 //main function starts here
 int main (void) {
@@ -32,6 +33,7 @@ int main (void) {
     for(int i = 0; i < 4; i++) {
         insertNode(&head, getListSize(head));
     }
+    printList(head);
     return 0;
 }
 
@@ -90,7 +92,7 @@ void insertNode(NODE** addressOfHead, int position) {
 }
 
 /*
-    This function will delte node at any given location
+    This function will delete node at any given location
 */
 void deleteNode (NODE** addressOfHead, int pos) {
 
@@ -109,6 +111,9 @@ void deleteNode (NODE** addressOfHead, int pos) {
     printf("[DELETED] Node at Position : %d\n", pos);
 }
 
+/*
+    This function will returns the number of nodes in the list
+*/
 int getListSize(NODE* head) {
     NODE* list = head;
     int counter = 1; //counting from 1
@@ -118,4 +123,22 @@ int getListSize(NODE* head) {
     }
 
     return counter;
+}
+
+/*
+    This function will print the LinkedList
+*/
+void printList (NODE* head) {
+    
+    NODE* list = head;
+    printf("\nLIST : ");
+    while(true) {
+        printf("%d -> ", list->data);
+        list = list->next;
+        if(list == NULL) {
+            printf("null\n");
+            break;
+        }
+    }
+    printf("\n");
 }
