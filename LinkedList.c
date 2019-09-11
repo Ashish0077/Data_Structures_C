@@ -18,6 +18,7 @@ typedef struct node NODE;
 
 //function prototypes
 NODE* createNode();
+NODE* getNode();
 
 //main function starts here
 int main (void) {
@@ -39,4 +40,22 @@ NODE* createNode () {
     printf("Enter Data : ");
     scanf("%d", &newNode->data);
     return newNode;
+}
+
+/*
+    This function returns a node at the given position
+*/
+
+NODE* getNode(NODE* head, int position) {
+    NODE* list = head;
+    int counter = 1;
+    while (counter != position) {
+        list = list->next;
+        if(list == NULL) {
+            printf("Reached List End, No Such position");
+            return NULL;
+        }
+        counter++;
+    }
+    return list;
 }
