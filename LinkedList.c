@@ -29,10 +29,19 @@ int main (void) {
 
     //Test Code
     NODE* head = createNode();
-
     for(int i = 0; i < 4; i++) {
         insertNode(&head, getListSize(head));
     }
+    printList(head);
+    printf("[INSERT] Node at position 3\n");
+    insertNode(&head, 3);
+    printList(head);
+    printf("[INSERT] Node at position 1\n");
+    insertNode(&head, 1);
+    printList(head);
+    deleteNode(&head, 2);
+    deleteNode(&head, 1);
+    printList(head);
     printList(head);
     return 0;
 }
