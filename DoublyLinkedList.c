@@ -71,6 +71,11 @@ NODE* getNode(NODE* head, int position) {
     int counter =  1;
     while(counter != position) {
         list = list->next;
+        if(list == NULL) {
+            printf("Reached List End, No Such position");
+            return NULL;
+        }
+        counter++;
     }
     return list;
 }
