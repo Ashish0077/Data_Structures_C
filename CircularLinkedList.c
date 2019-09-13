@@ -46,7 +46,7 @@ int main (void) {
 
 /*
     This function allocates memory for newNode
-    takes data input and initializes next to null
+    takes data input and initializes next to itself
     and returns the address to the newNode
 */
 NODE* createNode () {
