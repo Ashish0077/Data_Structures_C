@@ -16,8 +16,43 @@ struct Node {
     struct Node* prev;
 };
 
+typedef struct Node NODE;
+
+//Function prototypes
+NODE* createNode();
+NODE* getNode(NODE* head, int position);
+
 //main function starts here
 int main (void) {
 
+    //Test Case
+    NODE* head = createNode();
+
     return 0;
+}
+
+/*
+    This function allocates memory for newNode
+    takes data input and initializes next to null
+    and returns the address to the newNode
+*/
+NODE* createNode() {
+    NODE* newNode = (NODE*) malloc(sizeof(NODE));
+    newNode->next = NULL;
+    newNode->prev = NULL;
+    printf("Enter Data : ");
+    scanf("%d", &newNode->data);
+    return newNode;
+}
+
+/*
+    This function returns the node which is at the given position
+*/
+NODE* getNode(NODE* head, int position) {
+    NODE* list = head;
+    int counter =  1;
+    while(counter != position) {
+        list = list->next;
+    }
+    return list;
 }
