@@ -21,6 +21,7 @@ typedef struct Node NODE;
 //Function prototypes
 NODE* createNode();
 NODE* getNode(NODE* head, int position);
+void printList(NODE* head);
 
 //main function starts here
 int main (void) {
@@ -55,4 +56,21 @@ NODE* getNode(NODE* head, int position) {
         list = list->next;
     }
     return list;
+}
+
+/*
+    This function will print the DoublyLinkedList
+*/
+void printList(NODE* head) {
+    NODE* list = head;
+    printf("\nLIST : null <- ");
+    while(true) {
+        printf("%d <-> ", list->data);
+        list = list->next;
+        if(list == NULL) {
+            printf("\b\b\b\b-> null\n");
+            break;
+        }
+    }
+    printf("\n\n");
 }
