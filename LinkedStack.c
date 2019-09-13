@@ -28,6 +28,11 @@ int main(void) {
         //display(stack);    
     }
 
+    for(int i = 0; i < 11; i++) {
+        pop(&stack);
+        //display(stack);
+    }
+
     return 0;
 }
 
@@ -45,6 +50,20 @@ void push(Stack** stack, int element) {
         *stack = newElement;
     }
 
+}
+
+int pop(Stack** stack) {
+    if(*stack == NULL) {
+        printf("UNDERFLOW, stack is empty\n");
+        return -1;
+    } else {
+        Stack* poped = *stack;
+        *stack = (*stack)->next;
+        int popedElement = poped->data;
+        printf("Element %d, is poped out of the stack\n", popedElement);
+        free(poped);
+        return popedElement;
+    }
 }
 
 /*
