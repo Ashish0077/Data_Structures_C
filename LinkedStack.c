@@ -16,6 +16,7 @@ typedef struct LinkedStack Stack;
 //Function prototype
 void push(Stack** stack, int element);
 int pop(Stack** stack);
+bool isEmpty(Stack* stack);
 //void display(Stack* top);
 
 //main function starts here
@@ -39,7 +40,7 @@ int main(void) {
 void push(Stack** stack, int element) {
     printf("Element %d, is pushed into the stack\n", element);
     
-    if(*stack == NULL) {
+    if(isEmpty(*stack)) {
         *stack = (Stack*) malloc(sizeof(Stack));
         (*stack)->data = element;
         (*stack)->next = NULL;
@@ -53,7 +54,7 @@ void push(Stack** stack, int element) {
 }
 
 int pop(Stack** stack) {
-    if(*stack == NULL) {
+    if(isEmpty(*stack)) {
         printf("UNDERFLOW, stack is empty\n");
         return -1;
     } else {
@@ -64,6 +65,13 @@ int pop(Stack** stack) {
         free(poped);
         return popedElement;
     }
+}
+
+bool isEmpty(Stack* stack) {
+    if(stack == NULL) {
+        return true;
+    }
+    return false;
 }
 
 /*
