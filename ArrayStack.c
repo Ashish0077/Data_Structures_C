@@ -17,16 +17,20 @@ struct ArrayStack {
 typedef struct ArrayStack Stack;
 
 //Function Prototypes
-void push(Stack stack, int element);
-void pop();
+void push(Stack* stack, int element);
+int pop(Stack* stack);
 
 //main function starts here
 int main (void) {
 
     //Test Case
-    Stack stack;
-    for(int i = 0; i < 10; i++) {
-        push(stack, i);
+    Stack stack = {-1};
+    for(int i = 0; i < 11; i++) {
+        push(&stack, i);
+    }
+
+    for(int i = 0; i < 11; i++) {
+        pop(&stack);
     }
     return 0;
 }
@@ -34,12 +38,27 @@ int main (void) {
 /*
     This function is used to insert elements in the stack
 */
-void push(Stack stack, int element){
-    if(stack.top == SIZE) {
+void push(Stack* stack, int element){
+    (*stack).top++;
+    if((*stack).top == SIZE) {
         printf("OVERFLOW, stack is full\n");
+        (*stack).top--;
         return;
     }
-    stack.top++;
-    stack.data[stack.top] = element;
-    printf("Element %d is pushed into the stack\n", element);
+    (*stack).data[(*stack).top] = element;
+    printf("Element %d is pushed into the stack\n", (*stack).data[(*stack).top]);
+}
+
+/*
+    This function is used to pop out elements from the stack
+*/
+int pop(Stack* stack) {
+    if((*stack).top == -1) {
+        printf("UNDERFLOW, stack is empty\n");
+        return -1;
+    }
+    
+    int popedElement = (*stack).data[(*stack).top];
+    printf("Element %d, is poped out of the stack\n", popedElement);
+    (*stack).top--;
 }
