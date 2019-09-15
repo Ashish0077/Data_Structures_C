@@ -5,11 +5,13 @@
 #include<stdlib.h>
 #include<stdbool.h>
 
+//Structure for the node of linkedlist
 struct node {
     int data;
     struct node* next;
 };
 
+//Structure for LinkedQueue
 struct LinkedQueue {
   struct node* front;
   struct node* rear;  
@@ -28,6 +30,7 @@ int dequeue(Queue* addressOfQueue);
 //main function starts here
 int main (void) {
 
+    //test code
     Queue queue = createQueue();
     for(int i = 0; i < 5; i++) {
         enqueue(&queue, i+2);
@@ -41,6 +44,9 @@ int main (void) {
     return 0;
 }
 
+/*
+    This function is used to create new Node for the linked list
+*/
 Node* createNewElement(int element) {
     Node* newElement = (Node*) malloc(sizeof(Node));
     newElement->next = NULL;
@@ -48,6 +54,9 @@ Node* createNewElement(int element) {
     return newElement;
 }
 
+/*
+    This function is used to create Queue
+*/
 Queue createQueue() {
     int element;
     printf("Enter data : ");
@@ -59,13 +68,18 @@ Queue createQueue() {
     return queue;
 }
 
-
+/*
+    This function is used to insert elements in the queue
+*/
 void enqueue(Queue* addressOfQueue, int element) {
     Node* newElement = createNewElement(element);
     (*addressOfQueue).rear->next = newElement;
     (*addressOfQueue).rear = newElement;
 }
 
+/*
+    This function is used to display Queue on the screen
+*/
 void display(Queue queue) {
     if(queue.front == NULL) {
         return;
@@ -79,7 +93,14 @@ void display(Queue queue) {
     printf("\b\b }\n");
 }
 
+/*
+    this function is used to delete elements from the Queue
+*/
 int dequeue(Queue* addressOfQueue) {
+    if((*addressOfQueue).front == NULL) {
+        printf("Underflow\n"); 
+        return -1;
+    }
     Node* deletedElement = (*addressOfQueue).front;
     (*addressOfQueue).front = deletedElement->next;
     if((*addressOfQueue).front == NULL) {
