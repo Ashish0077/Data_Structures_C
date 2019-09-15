@@ -1,6 +1,6 @@
 /*
     *This file contains an implementation of an integer only queue using static array
-    *constant size stack
+    *constant size Queue
 */
 #include<stdio.h>
 #include<stdlib.h>
