@@ -23,15 +23,21 @@ Queue createQueue();
 Node* createNewElement(int element);
 void enqueue(Queue* queue, int element);
 void display(Queue queue);
+int dequeue(Queue* addressOfQueue);
 
 //main function starts here
 int main (void) {
 
     Queue queue = createQueue();
     for(int i = 0; i < 5; i++) {
-        enqueue(&queue, i+1);
+        enqueue(&queue, i+2);
     }
     display(queue);
+
+    for(int i = 0; i < 6; i++) {
+        dequeue(&queue);
+        display(queue);
+    }
     return 0;
 }
 
@@ -61,11 +67,26 @@ void enqueue(Queue* addressOfQueue, int element) {
 }
 
 void display(Queue queue) {
+    if(queue.front == NULL) {
+        return;
+    }
     Node* list = queue.front;
-    printf("\n{ ");
+    printf("{ ");
     while(list != NULL) {
         printf("%d, ", list->data);
         list = list->next;
     }
     printf("\b\b }\n");
+}
+
+int dequeue(Queue* addressOfQueue) {
+    Node* deletedElement = (*addressOfQueue).front;
+    (*addressOfQueue).front = deletedElement->next;
+    if((*addressOfQueue).front == NULL) {
+        (*addressOfQueue).rear = NULL;
+    }
+    printf("Element %d, is removed from Queue\n", deletedElement->data);
+    int n = deletedElement->data;
+    free(deletedElement);
+    return n;
 }
