@@ -20,6 +20,7 @@ struct ArrayPriorityQueue
 {
     int rear;
     int front;
+    int maxPriorityIndex;
     Element data[SIZE];
 };
 
@@ -29,6 +30,7 @@ typedef struct ArrayPriorityQueue Queue;
 Queue createQueue();
 void insert(Queue* addressOfQueue, int data, int priority);
 void display(Queue queue);
+Element getMaxPriorityElement(Queue queue);
 
 //main function starts here
 int main (void) {
@@ -39,16 +41,17 @@ int main (void) {
     }
 
     display(queue);
+    printf("%d\n", getMaxPriorityElement(queue).data);
 
     return 0;
 }
 
 Queue createQueue() {
-    Queue Queue;
-    Queue.front = -1;
-    Queue.rear = -1;
-
-    return Queue;
+    Queue queue;
+    queue.front = -1;
+    queue.rear = -1;
+    queue.maxPriorityIndex = -1;
+    return queue;
 }
 
 void insert(Queue* addressOfQueue, int data, int priority) {
@@ -60,12 +63,14 @@ void insert(Queue* addressOfQueue, int data, int priority) {
         queue.front++;
         queue.rear++;
         queue.data[queue.rear] = element;
-        *addressOfQueue = queue;
     } else {
         queue.rear++;
         queue.data[queue.rear] = element;
-        *addressOfQueue = queue;
     }
+    if(queue.data[queue.maxPriorityIndex].priority < priority) {
+        queue.maxPriorityIndex = queue.rear;
+    }
+    *addressOfQueue = queue;
 }
 
 void display(Queue queue) {
@@ -73,4 +78,8 @@ void display(Queue queue) {
     for(int i = queue.front; i <= queue.rear; i++) {
         printf("%d\t%d\n", queue.data[i].data, queue.data[i].priority);
     }
+}
+
+Element getMaxPriorityElement(Queue queue) {
+    return queue.data[queue.maxPriorityIndex];
 }
