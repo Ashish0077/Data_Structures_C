@@ -20,8 +20,24 @@ struct LinkedPriorityQueue {
 };
 typedef struct LinkedPriorityQueue Queue;
 
+//function prototypes
+Queue createQueue();
+
 //main function starts here
 int main (void) {
 
+    //test code
+    Queue queue = createQueue();
+
     return 0;
+}
+
+/*
+    This function creates a new Queue a returns it
+*/
+Queue createQueue() {
+    Queue queue; 
+    queue.front = NULL;
+    queue.rear = NULL;
+    return queue;
 }
