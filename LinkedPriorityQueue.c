@@ -15,8 +15,7 @@ typedef struct node Element;
 
 //This structure represents the Queue
 struct LinkedPriorityQueue {
-    Element* front;
-    Element* rear;   
+    Element* front; 
 };
 typedef struct LinkedPriorityQueue Queue;
 
@@ -24,15 +23,21 @@ typedef struct LinkedPriorityQueue Queue;
 Queue createQueue();
 Element* createElement(int data, int priority);
 void insert(Queue* addressOfQueue, int data, int priority);
+void display(Queue queue);
 
 //main function starts here
 int main (void) {
 
     //test code
     Queue queue = createQueue();
-    for(int i = 0; i < 5; i++) {
-        insert(&queue, i, i+1);
-    }
+    insert(&queue, 1, 1);
+    display(queue);
+    insert(&queue, 2, 3);
+    display(queue);
+    insert(&queue, 3, 2);
+    display(queue);
+    insert(&queue, 4, 0);
+    display(queue);
 
     return 0;
 }
@@ -43,7 +48,6 @@ int main (void) {
 Queue createQueue() {
     Queue queue; 
     queue.front = NULL;
-    queue.rear = NULL;
     return queue;
 }
 
@@ -62,17 +66,33 @@ Element* createElement(int data, int priority) {
 
 /*
     this function is used to insert elements in the Queue
+    acoording to the priority
 */
 void insert(Queue* addressOfQueue, int data, int priority) {
-    Element* newElement = createElement(data, priority);
     Queue queue = *addressOfQueue;
-    if(queue.front == NULL && queue.rear == NULL) {
+    Element* newElement = createElement(data, priority);
+    if(queue.front == NULL) {
         queue.front = newElement;
-        queue.rear = newElement;
+    } else if(queue.front->priority < priority) {
+        newElement->next = queue.front;
+        queue.front = newElement;
     } else {
-        queue.rear->next = newElement;
-        queue.rear = newElement;
+        Element* list = queue.front;
+        while(list->next != NULL && list->next->priority > priority)
+        {
+            list = list->next;
+        }
+        newElement->next = list->next;
+        list->next = newElement;
     }
-
     *addressOfQueue = queue;
+}
+
+void display(Queue queue) {
+    printf("Data\tPriority\n");
+    while(queue.front != NULL) {
+        printf("%d\t%d\n", queue.front->data, queue.front->priority);
+        queue.front = queue.front->next;
+    }
+    printf("\n\n");
 }
