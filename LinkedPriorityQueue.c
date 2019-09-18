@@ -24,6 +24,7 @@ Queue createQueue();
 Element* createElement(int data, int priority);
 void insert(Queue* addressOfQueue, int data, int priority);
 void display(Queue queue);
+void delete(Queue* addressOfQueue);
 
 //main function starts here
 int main (void) {
@@ -38,6 +39,11 @@ int main (void) {
     display(queue);
     insert(&queue, 4, 0);
     display(queue);
+
+    for(int i = 0; i < 4; i++) {
+        delete(&queue);
+        display(queue);
+    }
 
     return 0;
 }
@@ -89,10 +95,26 @@ void insert(Queue* addressOfQueue, int data, int priority) {
 }
 
 void display(Queue queue) {
+    if(queue.front == NULL) {
+        printf("EMPTY\n");
+        return;
+    }
     printf("Data\tPriority\n");
     while(queue.front != NULL) {
         printf("%d\t%d\n", queue.front->data, queue.front->priority);
         queue.front = queue.front->next;
     }
     printf("\n\n");
+}
+
+void delete(Queue* addressOfQueue) {
+    Queue queue = *addressOfQueue;
+    if(queue.front == NULL) {
+        printf("Queue is Empty.\n");
+    } else {
+        Element* deletedElement = queue.front;
+        queue.front = queue.front->next;
+        free(deletedElement);
+    }
+    *addressOfQueue = queue;
 }
