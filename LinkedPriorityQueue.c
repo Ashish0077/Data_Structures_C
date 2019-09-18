@@ -94,6 +94,7 @@ void insert(Queue* addressOfQueue, int data, int priority) {
     *addressOfQueue = queue;
 }
 
+//this function is used to display the queue
 void display(Queue queue) {
     if(queue.front == NULL) {
         printf("EMPTY\n");
@@ -107,6 +108,10 @@ void display(Queue queue) {
     printf("\n\n");
 }
 
+/*
+    this function is used to delete elements from the Queue
+    acoording to the priority
+*/
 void delete(Queue* addressOfQueue) {
     Queue queue = *addressOfQueue;
     if(queue.front == NULL) {
