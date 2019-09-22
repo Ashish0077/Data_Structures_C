@@ -6,6 +6,7 @@
 #include<stdbool.h>
 #include<time.h>
 
+void swap(int* a, int* b);
 
 //Main function starts here
 int main (void) {
@@ -22,4 +23,11 @@ int main (void) {
     }
 
     return 0;
+}
+
+//This function is used to swap two values (pass by reference)
+void swap (int* a, int* b)  {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
