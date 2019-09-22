@@ -10,7 +10,11 @@ void LinearSearch(int element,int arr[], int size);
 int main (void) {
     int arr[] = {0, 1, 9, 6, 2, 4, 3};
 
-    LinearSearch(6, arr, sizeof(arr)/sizeof(arr[0]));
+    int e;
+    printf("Enter the Element You want to search : ");
+    scanf("%d", &e);
+
+    LinearSearch(e, arr, sizeof(arr)/sizeof(arr[0]));
 
     return 0;
 }
