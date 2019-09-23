@@ -96,7 +96,7 @@ void insertNode(NODE** addressOfHead, int position) {
     else {
         list = getNode(*addressOfHead, position - 1); //getting the node just before the position
         if (list == NULL) {
-            return
+            return;
         }
         newNode->next = list->next; //setting the new node next to the the node at the position (position-1 + 1 = position)
         list->next = newNode;
