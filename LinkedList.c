@@ -38,10 +38,11 @@ int main (void) {
     printList(head);
     printf("[INSERT] Node at position 1\n");
     insertNode(&head, 1);
+    printf("[INSERT] Node at position 50\n");
+    insertNode(&head, 50);
     printList(head);
     deleteNode(&head, 2);
     deleteNode(&head, 1);
-    printList(head);
     printList(head);
     return 0;
 }
@@ -68,7 +69,7 @@ NODE* getNode(NODE* head, int position) {
     while (counter != position) {
         list = list->next;
         if(list == NULL) {
-            printf("Reached List End, No Such position");
+            printf("Reached List End, No Such position\n");
             return NULL;
         }
         counter++;
@@ -94,6 +95,9 @@ void insertNode(NODE** addressOfHead, int position) {
     }
     else {
         list = getNode(*addressOfHead, position - 1); //getting the node just before the position
+        if (list == NULL) {
+            return
+        }
         newNode->next = list->next; //setting the new node next to the the node at the position (position-1 + 1 = position)
         list->next = newNode;
     }
