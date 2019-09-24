@@ -16,19 +16,19 @@ void SelectionSort(int arr[], int size);
 int main (void) {
 
     //test Code
-    int arr[10];
+    int arr[100];
 
     // Use current time as seed for random generator
     srand(time(0));
 
     //initializing the array with random numbers
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 100; i++) {
         arr[i] = rand();
     }
 
     printf("Sorted Array : - \n");
-    SelectionSort(arr, 10);
-    for(int i = 0; i < 10; i++) {
+    SelectionSort(arr, 100);
+    for(int i = 0; i < 100; i++) {
         printf("%d\n", arr[i]);
     }
 
