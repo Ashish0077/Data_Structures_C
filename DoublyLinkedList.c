@@ -41,6 +41,9 @@ int main (void) {
     printf("[INSERT] Node at position 1\n");
     insertNode(&head, 1);
     printList(head);
+    printf("[INSERT] Node at position 50\n");
+    insertNode(&head, 50);
+    printList(head);
     deleteNode(&head, 2);
     deleteNode(&head, 1);
     printList(head);
@@ -137,6 +140,9 @@ void insertNode(NODE** addressOfHead, int position) {
         *addressOfHead = newNode;
     } else {
         loc = getNode(*addressOfHead, position - 1);
+        if (loc == NULL) {
+            return;
+        }
         NODE* loc2 = loc->next;
         loc2->prev = newNode;
         newNode->next = loc2;
