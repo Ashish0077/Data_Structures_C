@@ -7,6 +7,7 @@
 #include<time.h>
 
 void swap(int* a, int* b);
+void InsertionSort(int arr[], int size);
 
 //Main function starts here
 int main (void) {
@@ -22,6 +23,12 @@ int main (void) {
         arr[i] = rand();
     }
 
+    InsertionSort(arr, 10);
+    printf("Sorted Array :\n");
+    for(int i = 0; i < 10; i++) {
+        printf("%d\n", arr[i]);
+    }
+
     return 0;
 }
 
@@ -30,4 +37,11 @@ void swap (int* a, int* b)  {
     int temp = *a;
     *a = *b;
     *b = temp;
+}
+
+void InsertionSort(int arr[], int size) {
+
+    for (int i = 1; i < size; i++)
+        for (int j = i; j > 0 && arr[j] > arr[j - 1]; j--)
+            swap(&arr[j - 1], &arr[j]);
 }
