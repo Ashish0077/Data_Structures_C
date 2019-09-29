@@ -5,6 +5,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
+#include<time.h>
 
 void swap(int *a, int *b);
 void quickSort(int arr[], int startPoint, int endPoint);
@@ -18,6 +19,7 @@ int main (void) {
     for(int i = 0; i < 10; i++) {
         arr[i] = i;
     }
+    quickSort(arr, 0, 9);
     return 0;
 }
 
@@ -39,5 +41,18 @@ void quickSort(int arr[], int startPoint, int endPoint) {
     }
 }
 
+int partition(int arr[], int startPoint, int endPoint) {
+    int pivot = arr[endPoint];
+    int i = (endPoint - 1);
 
+    for(int j = startPoint; i < endPoint; i++) {
+        if(arr[j] <= pivot) {
+            printf("Swapping");
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i+1], &arr[endPoint]);
 
+    return i + 1;
+}
